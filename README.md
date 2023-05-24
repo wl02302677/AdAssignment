@@ -26,14 +26,51 @@ Subtotal: £1.30
 (No offers available)
 Total price: £1.3
 
+## Project structure
+1. lib: main directory
+   1. discountStrategy (strategy pattern)
+      1. trait: DiscountStrategy
+      2. implement1: ApplesDiscountStrategy
+      3. implement2: SoupBreadDealDiscountStrategy
+   2. DiscountCalculator: calculate discount 
+   3. PriceBasket: main logic to calculate subtotal, offerDiscounts, totalPrice
+
 ## How to use the function
 
 1. clone project from repository
 
 `git clone https://github.com/wl02302677/AdAssignment/tree/dev-shopping-basket`
 
-2. install java
-3. install scala
+- Jump to step 5 if no need set up environment
+2. install java & set up to path
+
+   - download java jdk
+   https://www.openlogic.com/openjdk-downloads
+    
+   - set java Xpath 
+    
+     1. `windows + R`
+     2. key `sysdm.cpl`
+     3. click: advance - environment variable
+     4. System variable - add -> variable name: JAVA_HOME, value:C:\Program Files\Java\[jdk_your_version]
+     5. System variable find [path] and edit it -> add %JAVA_HOME%\bin on it
+3. install scala & set up to path
+    - get the scala from https://www.scala-lang.org/download/
+     1. unzip or install on [path]
+     2. `windows + R`
+     3. key `sysdm.cpl`
+     4. click: advance - environment variable
+     5. System variable - add -> variable name: SCALA_HOME, value:[your_scala_path] EX: c:\Progra~1\Scala
+     6. System variable find [path] and edit it -> add %SCALA_HOME%\bin on it
 4. install sbt
+follow the official way to install sbt by different os
+   - https://www.scala-sbt.org/download.html
+
 5. package jar file
+    
+    `cd [path_of_repositrory]/`
+    ` sbt assembly `
+
 6. run the jar file
+    - `java -jar PriceBasketTest.jar [item1] [item2] [item3] ...`
+    - ex: `java -jar PriceBasketTest.jar Apples Apples Milk Bread`
