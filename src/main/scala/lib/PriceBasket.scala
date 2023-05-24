@@ -19,7 +19,7 @@ class PriceBasket {
   )
 
   // TODO: testing
-  def calculatePrice(basket: List[String]): Unit = {
+  def calculatePrice(basket: List[String]): List[Any] = {
     val itemCounts = calculateItemCount(basket)
     val subtotal = calculateSubtotal(itemCounts)
     println(s"Subtotal: £${formatPrice(subtotal)}")
@@ -34,20 +34,22 @@ class PriceBasket {
     } else
       println("(No offers available)")
     println(s"Total price: £${formatPrice(totalPrice)}")
+
+    List (formatPrice(subtotal), formatPrice(offerDiscounts), formatPrice(totalPrice))
   }
 
-  private def calculateItemCount(basket: List[String]): Map[String, Int] = {
+  def calculateItemCount(basket: List[String]): Map[String, Int] = {
     val basketItemCount: Map[String, Int] = basket.groupBy(identity).mapValues(_.size)
     basketItemCount
   }
 
-  private def calculateSubtotal(itemCounts: Map[String, Int]): Double = {
+  def calculateSubtotal(itemCounts: Map[String, Int]): Double = {
     itemCounts.foldLeft(0.0) { case (subtotal, (item, count)) =>
       subtotal + groceriesPrices.getOrElse(item, 0.0) * count
     }
   }
 
-  private def formatPrice(price: Double): String = {
+  def formatPrice(price: Double): String = {
     // format to float and keep 2 decimal place
     f"$price%.2f"
   }
@@ -56,13 +58,9 @@ class PriceBasket {
   // input may like: apples: 2 Soup: 2 Bread 1
 object PriceBasket {
   def main(args: Array[String]): Unit = {
+    //
+//    var args = Array[String]("Soup", "Apples", "Apples", "Bread", "Soup")
     var args = Array[String]("Soup", "Apples", "Apples", "Bread", "Soup")
-
-    if (args.length < 2) {
-      println("Usage: PriceBasket item1 item2 item3 ...")
-      System.exit(1)
-    }
-
     // val items = args.toList.tail
     val items = args.toList
     val basket = new PriceBasket

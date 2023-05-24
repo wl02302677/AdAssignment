@@ -27,3 +27,13 @@ Subtotal: £1.30
 Total price: £1.3
 
 ## How to use the function
+
+1. clone project from repository
+
+`git clone https://github.com/wl02302677/AdAssignment/tree/dev-shopping-basket`
+
+2. install java
+3. install scala
+4. install sbt
+5. package jar file
+6. run the jar file
