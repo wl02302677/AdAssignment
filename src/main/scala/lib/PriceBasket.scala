@@ -60,7 +60,7 @@ object PriceBasket {
   def main(args: Array[String]): Unit = {
     //
 //    var args = Array[String]("Soup", "Apples", "Apples", "Bread", "Soup")
-    var args = Array[String]("Soup", "Apples", "Apples", "Bread", "Soup")
+//    var args = Array[String]("Soup", "Apples", "Apples", "Bread", "Soup")
     // val items = args.toList.tail
     val items = args.toList
     val basket = new PriceBasket

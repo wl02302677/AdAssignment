@@ -74,3 +74,10 @@ follow the official way to install sbt by different os
 6. run the jar file
     - `java -jar PriceBasketTest.jar [item1] [item2] [item3] ...`
     - ex: `java -jar PriceBasketTest.jar Apples Apples Milk Bread`
+
+
+## How to use the function by intelliJ
+1. install intelliJ: https://www.jetbrains.com/idea/download/download-thanks.html?platform=windows&code=IIC
+2. open the project
+3. click PriceBasket.scala and modify parameter on args Array
+4. Run PriceBasket
