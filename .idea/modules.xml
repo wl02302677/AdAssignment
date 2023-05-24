@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/AdAssignment.iml" filepath="$PROJECT_DIR$/.idea/modules/AdAssignment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AdAssignment-build.iml" filepath="$PROJECT_DIR$/.idea/modules/AdAssignment-build.iml" />
     </modules>
   </component>
 </project>

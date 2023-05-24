@@ -1,0 +1,69 @@
+package lib
+
+import lib.discountStrategy.{ApplesDiscountStrategy, DiscountStrategy, SoupBreadDealDiscountStrategy}
+
+import scala.collection.mutable.{Map => MutableMap}
+
+class PriceBasket {
+
+  val groceriesPrices: Map[String, Double] = Map(
+    "Soup" -> 0.65,
+    "Bread" -> 0.80,
+    "Milk" -> 1.30,
+    "Apples" -> 1.00
+  )
+
+  val discountStrategies: Map[String, DiscountStrategy] = Map(
+    "Apples" -> new ApplesDiscountStrategy(),
+    "SoupBreadDeal" -> new SoupBreadDealDiscountStrategy()
+  )
+
+  // TODO: 計算折扣, 測試, 策略模式完善
+  def calculatePrice(basket: List[String]): Unit = {
+    val itemCounts = calculateItemCount(basket)
+    val subtotal = calculateSubtotal(itemCounts)
+
+    val discountCalculator = new DiscountCalculator(discountStrategies)
+    val offerDiscounts: Double = discountCalculator.calculateDiscountAmount(itemCounts, groceriesPrices)
+    val totalPrice = subtotal - offerDiscounts
+
+    println(s"Subtotal: £${formatPrice(subtotal)}")
+    if (offerDiscounts > 0)
+      println(s"Special offer discounts: £${formatPrice(offerDiscounts)}")
+    else
+      println("(No offers available)")
+    println(s"Total price: £${formatPrice(totalPrice)}")
+  }
+
+  private def calculateItemCount(basket: List[String]): Map[String, Int] = {
+    val basketItemCount: Map[String, Int] = basket.groupBy(identity).mapValues(_.size)
+    basketItemCount
+  }
+
+  private def calculateSubtotal(itemCounts: Map[String, Int]): Double = {
+    itemCounts.foldLeft(0.0) { case (subtotal, (item, count)) =>
+      subtotal + groceriesPrices.getOrElse(item, 0.0) * count
+    }
+  }
+
+  private def formatPrice(price: Double): String = {
+    f"$price%.2f"
+  }
+
+
+  // input may like: apples: 3 Soup: 2
+  //object PriceBasket {
+  def main(args: Array[String]): Unit = {
+    var args = Array[String]("Soup", "Apples", "Apples", "Bread", "Soup")
+
+    if (args.length < 2) {
+      println("Usage: PriceBasket item1 item2 item3 ...")
+      System.exit(1)
+    }
+
+    // val items = args.toList.tail
+    val items = args.toList
+    val basket = new PriceBasket
+    basket.calculatePrice(items)
+  }
+}
