@@ -6,7 +6,7 @@ import scala.collection.mutable.{Map => MutableMap}
 
 class PriceBasket {
 
-  val groceriesPrices: Map[String, Double] = Map(
+  private val groceriesPrices: Map[String, Double] = Map(
     "Soup" -> 0.65,
     "Bread" -> 0.80,
     "Milk" -> 1.30,
@@ -18,19 +18,20 @@ class PriceBasket {
     "SoupBreadDeal" -> new SoupBreadDealDiscountStrategy()
   )
 
-  // TODO: 計算折扣, 測試, 策略模式完善
+  // TODO: testing
   def calculatePrice(basket: List[String]): Unit = {
     val itemCounts = calculateItemCount(basket)
     val subtotal = calculateSubtotal(itemCounts)
+    println(s"Subtotal: £${formatPrice(subtotal)}")
 
     val discountCalculator = new DiscountCalculator(discountStrategies)
     val offerDiscounts: Double = discountCalculator.calculateDiscountAmount(itemCounts, groceriesPrices)
     val totalPrice = subtotal - offerDiscounts
 
-    println(s"Subtotal: £${formatPrice(subtotal)}")
-    if (offerDiscounts > 0)
+
+    if (offerDiscounts > 0) {
       println(s"Special offer discounts: £${formatPrice(offerDiscounts)}")
-    else
+    } else
       println("(No offers available)")
     println(s"Total price: £${formatPrice(totalPrice)}")
   }
@@ -47,12 +48,13 @@ class PriceBasket {
   }
 
   private def formatPrice(price: Double): String = {
+    // format to float and keep 2 decimal place
     f"$price%.2f"
   }
 
-
-  // input may like: apples: 3 Soup: 2
-  //object PriceBasket {
+}
+  // input may like: apples: 2 Soup: 2 Bread 1
+object PriceBasket {
   def main(args: Array[String]): Unit = {
     var args = Array[String]("Soup", "Apples", "Apples", "Bread", "Soup")
 
