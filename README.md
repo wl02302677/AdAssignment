@@ -27,6 +27,7 @@ Subtotal: £1.30
 Total price: £1.3
 
 ## Project structure
+main process file: src/main/scala/lib/PriceBasket.scala
 1. lib: main directory
    1. discountStrategy (strategy pattern)
       1. trait: DiscountStrategy
